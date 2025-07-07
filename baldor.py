@@ -16,7 +16,7 @@ def fraccion_mixta_a_decimal(parte_entera, numerador, denominador, exp=None):
     """
     if denominador == 0:
         raise ValueError('El denominador no puede ser 0')
-    if numerador < 0 or denominador <0:
+    if numerador < 0 or          denominador <0:
         # Se asume una parte fraccionario simpre positiva porque el signo
         # lo da la el valor entero
         raise ValueError('Numerador y denominador de la parte fraccionaria \
