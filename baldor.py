@@ -41,53 +41,17 @@ def fraccion_mixta_a_decimal(parte_entera, numerador, denominador, exp=None):
             return valor_absoluto_total * exp
         
 def _iterador_r(dic, ej):
-    """
-    Itera entre los ejercicios y muestra su respuesta
-
-    Args:
-        dic (dict): Diccionario con los ejercicios
-        ej (int): Ejercicio del libro
-        
-    Returns:
-        Nada, imprime las respuestas en consola
-    """
     for k, v in dic.items():
         print(f"EJ {ej}| {k}: {v}")
 
 def _iterador_r_pretty(dic, ej):
-    """
-    Itera entre los ejercicios y muestra su respuesta en formato pretty
-
-    Args:
-        dic (dict): Diccionario con los ejercicios
-        ej (int): Ejercicio del libro
-        
-    Returns:
-        Nada, imprime las respuestas en consola
-    """
     for k, v in dic.items():
-        print(f"""EJ {ej}| {k}:
-                
-{sympy.pretty(v)}
---------------------------------""")
+        print(f"""EJ {ej}| {k}:\n{sympy.pretty(v)}\n--------------------------------""")
         
 def _iterador_r_pretty_pow(dic, ej):
-    """
-    Itera entre los ejercicios y muestra su respuesta en formato pretty
-
-    Args:
-        dic (dict): Diccionario con los ejercicios
-        ej (int): Ejercicio del libro
-        
-    Returns:
-        Nada, imprime las respuestas en consola
-    """
     for k, v in dic.items():
         simp_v = sympy.powsimp(v)
-        print(f"""EJ {ej}| {k}:
-                
-{sympy.pretty(simp_v)}
---------------------------------""")
+        print(f"""EJ {ej}| {k}:\n{sympy.pretty(simp_v)}\n--------------------------------""")
 
 def it_respuesta(dic, ej, pretty=False, powsimp=False):
     """
@@ -96,11 +60,17 @@ def it_respuesta(dic, ej, pretty=False, powsimp=False):
     Args:
         dic (dict): Diccionario con los ejercicios
         ej (int): Ejercicio del libro
-        pretty (bool, optional): Formato sympy.pretty True o False 
-    git ad
+        pretty (bool, optional): Si True usa formato sympy.pretty. Por defecto
+                                    es False
+        powsimp (bool, optional): Si True aplica sympy.powsimp. Requiere 
+                                    pretty=True Por defecto es False
+    
     Returns:
         Nada, imprime las respuestas en consola
     """
+    if not isinstance(dic, dict):
+        raise TypeError("El argumento 'dic' debe ser un diccionario.")
+    
     if pretty is False:
         _iterador_r(dic, ej)
     elif pretty is True and powsimp is False: 
