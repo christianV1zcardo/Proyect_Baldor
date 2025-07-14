@@ -1,3 +1,5 @@
+import sympy
+
 def fraccion_mixta_a_decimal(parte_entera, numerador, denominador, exp=None):
     """
     Convierte una fracción mixta a decimal
@@ -66,10 +68,28 @@ def _iterador_r_pretty(dic, ej):
     for k, v in dic.items():
         print(f"""EJ {ej}| {k}:
                 
-    {sympy.pretty(v)}
-    --------------------------------""")
+{sympy.pretty(v)}
+--------------------------------""")
+        
+def _iterador_r_pretty_pow(dic, ej):
+    """
+    Itera entre los ejercicios y muestra su respuesta en formato pretty
 
-def it_respuesta(dic, ej, pretty=False):
+    Args:
+        dic (dict): Diccionario con los ejercicios
+        ej (int): Ejercicio del libro
+        
+    Returns:
+        Nada, imprime las respuestas en consola
+    """
+    for k, v in dic.items():
+        simp_v = sympy.powsimp(v)
+        print(f"""EJ {ej}| {k}:
+                
+{sympy.pretty(simp_v)}
+--------------------------------""")
+
+def it_respuesta(dic, ej, pretty=False, powsimp=False):
     """
     Itera entre los ejercicios y muestra su respuesta
 
@@ -77,11 +97,13 @@ def it_respuesta(dic, ej, pretty=False):
         dic (dict): Diccionario con los ejercicios
         ej (int): Ejercicio del libro
         pretty (bool, optional): Formato sympy.pretty True o False 
-    
+    git ad
     Returns:
         Nada, imprime las respuestas en consola
     """
     if pretty is False:
         _iterador_r(dic, ej)
-    else: 
+    elif pretty is True and powsimp is False: 
         _iterador_r_pretty(dic, ej)
+    elif pretty is True and powsimp is True:
+        _iterador_r_pretty_pow(dic, ej)
