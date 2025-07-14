@@ -37,3 +37,51 @@ def fraccion_mixta_a_decimal(parte_entera, numerador, denominador, exp=None):
             return -valor_absoluto_total * exp
         else:
             return valor_absoluto_total * exp
+        
+def _iterador_r(dic, ej):
+    """
+    Itera entre los ejercicios y muestra su respuesta
+
+    Args:
+        dic (dict): Diccionario con los ejercicios
+        ej (int): Ejercicio del libro
+        
+    Returns:
+        Nada, imprime las respuestas en consola
+    """
+    for k, v in dic.items():
+        print(f"EJ {ej}| {k}: {v}")
+
+def _iterador_r_pretty(dic, ej):
+    """
+    Itera entre los ejercicios y muestra su respuesta en formato pretty
+
+    Args:
+        dic (dict): Diccionario con los ejercicios
+        ej (int): Ejercicio del libro
+        
+    Returns:
+        Nada, imprime las respuestas en consola
+    """
+    for k, v in dic.items():
+        print(f"""EJ {ej}| {k}:
+                
+    {sympy.pretty(v)}
+    --------------------------------""")
+
+def it_respuesta(dic, ej, pretty=False):
+    """
+    Itera entre los ejercicios y muestra su respuesta
+
+    Args:
+        dic (dict): Diccionario con los ejercicios
+        ej (int): Ejercicio del libro
+        pretty (bool, optional): Formato sympy.pretty True o False 
+    
+    Returns:
+        Nada, imprime las respuestas en consola
+    """
+    if pretty is False:
+        _iterador_r(dic, ej)
+    else: 
+        _iterador_r_pretty(dic, ej)
