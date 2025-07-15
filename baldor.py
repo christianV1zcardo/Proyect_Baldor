@@ -44,16 +44,28 @@ def _iterador_r(dic, ej):
     for k, v in dic.items():
         print(f"EJ {ej}| {k}: {v}")
 
+def _salida_iteradores(k, v, ej):
+    print(f"""EJ {ej}| {k}:\n\n{v}\n\n-----------------------------------------------------------""")
+
 def _iterador_r_pretty(dic, ej):
     for k, v in dic.items():
-        print(f"""EJ {ej}| {k}:\n{sympy.pretty(v)}\n--------------------------------""")
+        v = sympy.pretty(v)
+        _salida_iteradores(k, v, ej)
         
 def _iterador_r_pretty_pow(dic, ej):
     for k, v in dic.items():
-        simp_v = sympy.powsimp(v)
-        print(f"""EJ {ej}| {k}:\n{sympy.pretty(simp_v)}\n--------------------------------""")
+        v = sympy.powsimp(v)
+        v = sympy.pretty(v)
+        _salida_iteradores(k, v, ej)
 
-def it_respuesta(dic, ej, pretty=False, powsimp=False):
+def _iterador_r_pretty_pow_exp(dic, ej):
+    for k, v in dic.items():
+        v = sympy.expand(v)
+        v = sympy.powsimp(v)
+        v = sympy.pretty(v)
+        _salida_iteradores(k, v, ej)
+
+def it_respuesta(dic, ej, pretty=False, powsimp=False, exp=False):
     """
     Itera entre los ejercicios y muestra su respuesta
 
@@ -64,6 +76,8 @@ def it_respuesta(dic, ej, pretty=False, powsimp=False):
                                     es False
         powsimp (bool, optional): Si True aplica sympy.powsimp. Requiere 
                                     pretty=True Por defecto es False
+        exp (bool, optional): Si True aplica sympy.expand. Requiere 
+                            pretty=True y powsim=True. Por defecto es False
     
     Returns:
         Nada, imprime las respuestas en consola
@@ -75,5 +89,9 @@ def it_respuesta(dic, ej, pretty=False, powsimp=False):
         _iterador_r(dic, ej)
     elif pretty is True and powsimp is False: 
         _iterador_r_pretty(dic, ej)
+    
     elif pretty is True and powsimp is True:
-        _iterador_r_pretty_pow(dic, ej)
+        if exp is True:
+            _iterador_r_pretty_pow_exp(dic, ej)
+        else:
+            _iterador_r_pretty_pow(dic, ej)
