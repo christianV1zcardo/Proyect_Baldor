@@ -39,7 +39,13 @@ def fraccion_mixta_a_decimal(parte_entera, numerador, denominador, exp=None):
             return -valor_absoluto_total * exp
         else:
             return valor_absoluto_total * exp
-        
+
+def respuesta():
+    print("Respuesta correcta")
+  
+def respuestas():
+    print("Todas las respuestas correctas")
+  
 def _iterador_r(dic, ej):
     for k, v in dic.items():
         print(f"EJ {ej}| {k}: {v}")
